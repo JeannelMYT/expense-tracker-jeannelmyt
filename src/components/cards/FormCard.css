@@ -1,0 +1,29 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-bottom: 1rem;
+  border-style: double;
+  border-width: 1px 1px;
+}
+
+.title {
+  text-align: center;
+}
+
+.submit-button {
+  padding-top: 1rem;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  font-weight: bold;
+  text-align:center;
+}
