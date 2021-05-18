@@ -45,30 +45,19 @@ const PersonalDetails = (props) => {
       userInput.confirmPassword !== "undefined"
     ) {
       if (userInput.newPassword !== event.target.value) {
-        successMessageChangeHandler("");
-        errorMessageChangeHandler("Passwords don't match");
+        setSuccessMessage("");
+        setErrorMessage("Passwords don't match");
       } else if (userInput.newPassword === event.target.value) {
-        errorMessageChangeHandler("");
+        setErrorMessage("");
       }
     }
-  };
-
-  const errorMessageChangeHandler = (message) => {
-    setErrorMessage(() => {
-      return { message };
-    });
-  };
-  const successMessageChangeHandler = (message) => {
-    setSuccessMessage(() => {
-      return { message };
-    });
   };
 
   const submitHandler = async (event) => {
     let updated = "";
     event.preventDefault();
-    errorMessageChangeHandler("");
-    successMessageChangeHandler("");
+    setErrorMessage("");
+    setSuccessMessage("");
     if (!userInput.newPassword) {
       updated = await updateUserDetails(token, {
         username: userInput.username,
@@ -84,9 +73,9 @@ const PersonalDetails = (props) => {
       });
     }
     if (updated.statusCode) {
-      errorMessageChangeHandler(updated.message);
+      setErrorMessage(updated.message);
     } else if (!updated.statusCode) {
-      successMessageChangeHandler("Details changed!");
+      setSuccessMessage("Details changed!");
       props.setToken({
         ...token,
         username: userInput.username,

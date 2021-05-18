@@ -8,9 +8,7 @@ const Login = (props) => {
     username: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState({
-    message: "",
-  });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const usernameChangeHandler = (event) => {
     setUserInput((prevState) => {
@@ -22,11 +20,6 @@ const Login = (props) => {
       return { ...prevState, password: event.target.value };
     });
   };
-  const errorMessageChangeHandler = (message) => {
-    setErrorMessage(() => {
-      return { message };
-    });
-  };
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -35,7 +28,7 @@ const Login = (props) => {
       password: userInput.password,
     });
     if (token.statusCode === 401) {
-      errorMessageChangeHandler("Invalid login details, please try again!");
+      setErrorMessage("Invalid login details, please try again!");
     } else if (!token.statusCode) {
       props.setToken(token);
     }
@@ -57,7 +50,7 @@ const Login = (props) => {
           <button type="submit">Submit</button>
         </div>
       </form>
-      <h4 className="error">{errorMessage.message}</h4>
+      <h4 className="error">{errorMessage}</h4>
     </FormCard>
   );
 };

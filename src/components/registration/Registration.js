@@ -7,12 +7,8 @@ const Registration = () => {
     email: "",
     password: "",
   });
-  const [errorMessage, setErrorMessage] = useState({
-    message: "",
-  });
-  const [successMessage, setSuccessMessage] = useState({
-    message: "",
-  });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const usernameChangeHandler = (event) => {
     setUserInput((prevState) => {
@@ -29,30 +25,21 @@ const Registration = () => {
       return { ...prevState, password: event.target.value };
     });
   };
-  const errorMessageChangeHandler = (message) => {
-    setErrorMessage(() => {
-      return { message };
-    });
-  };
-  const successMessageChangeHandler = (message) => {
-    setSuccessMessage(() => {
-      return { message };
-    });
-  };
+
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    errorMessageChangeHandler("");
-    successMessageChangeHandler("");
+    setErrorMessage("");
+    setSuccessMessage("");
     const registered = await registerUser({
       username: userInput.username,
       email: userInput.email,
       password: userInput.password,
     });
     if (registered.statusCode === 400) {
-      errorMessageChangeHandler(registered.message);
+      setErrorMessage(registered.message);
     } else if (!registered.statusCode) {
-      successMessageChangeHandler("Registration Success! Please login!");
+      setSuccessMessage("Registration Success! Please login!");
     }
   };
 
@@ -76,8 +63,8 @@ const Registration = () => {
           <button type="submit">Submit</button>
         </div>
       </form>
-      <h4 className="error">{errorMessage.message}</h4>
-      <h4 className="success">{successMessage.message}</h4>
+      <h4 className="error">{errorMessage}</h4>
+      <h4 className="success">{successMessage}</h4>
     </FormWrapperCard>
   );
 };
