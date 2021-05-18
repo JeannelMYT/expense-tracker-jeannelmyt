@@ -1,0 +1,19 @@
+.expenses-table {
+
+    border-width: 1px 1px;
+    border-color: black;
+    border-style:solid;
+}
+
+.table-header {
+    border-width: 1px 1px;
+    border-color: black;
+    border-style:solid;
+}
+
+.table-data {
+    border-width: 1px 1px;
+    border-color: black;
+    border-style:solid;
+    padding: 1rem;
+}

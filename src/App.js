@@ -1,31 +1,31 @@
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "./components/login/Login";
-import Registration from "./components/registration/Registration";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./components/dashboard/Dashboard";
 import PersonalDetails from "./components/personalDetails/PersonalDetails";
+import Main from "./components/main/Main";
 import useToken from "./useToken";
+import NavBar from "./components/navigation/Navbar";
 
 const App = () => {
   const { token, setToken } = useToken();
+
   if (!token) {
-    return (
-      <div className="main">
-        <Registration />
-        <Login setToken={setToken} />
-      </div>
-    );
+    return <Main setToken={setToken} />;
   }
   return (
     <div className="wrapper">
-      <h1>Expense Tracker JeannelMYT</h1>
+      <h1>Expense Tracker</h1>
       <BrowserRouter>
+        <NavBar setToken={setToken} />
         <Switch>
           <Route path="/dashboard">
             <Dashboard />
           </Route>
           <Route path="/personalDetails">
-            <PersonalDetails />
+            <PersonalDetails setToken={setToken} />
+          </Route>
+          <Route path="/">
+            <Redirect to="/dashboard" />
           </Route>
         </Switch>
       </BrowserRouter>

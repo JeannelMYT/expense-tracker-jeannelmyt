@@ -1,0 +1,22 @@
+.navigation-container {
+    display: flex;
+    justify-content:space-around;
+    align-items:center;
+    background-color: #7c84f8;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height:2rem;
+    color:white;
+    font-weight:bold;
+  }
+
+  .navbar-item {
+      color:black;
+  }
+  .is-active {
+      color:white;
+  }
+
+  .logout {
+      color:rgb(185, 19, 19);
+  }

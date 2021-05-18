@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FormCard from "../cards/FormCard";
 import "./Login.css";
 
-export default function Login(props) {
+const Login = (props) => {
   const [userInput, setUserInput] = useState({
     username: "",
     password: "",
@@ -60,13 +60,13 @@ export default function Login(props) {
       <h4 className="error">{errorMessage.message}</h4>
     </FormCard>
   );
-}
+};
 
 Login.propTypes = {
   setToken: PropTypes.func.isRequired,
 };
 
-async function loginUser(credentials) {
+const loginUser = async (credentials) => {
   return fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
     method: "POST",
     headers: {
@@ -74,4 +74,6 @@ async function loginUser(credentials) {
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
-}
+};
+
+export default Login;

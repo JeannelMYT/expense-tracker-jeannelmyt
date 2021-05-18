@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FormWrapperCard from "../cards/FormCard";
 
-export default function Registration() {
+const Registration = () => {
   const [userInput, setUserInput] = useState({
     username: "",
     email: "",
@@ -42,6 +42,8 @@ export default function Registration() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
+    errorMessageChangeHandler("");
+    successMessageChangeHandler("");
     const registered = await registerUser({
       username: userInput.username,
       email: userInput.email,
@@ -78,9 +80,9 @@ export default function Registration() {
       <h4 className="success">{successMessage.message}</h4>
     </FormWrapperCard>
   );
-}
+};
 
-async function registerUser(credentials) {
+const registerUser = async (credentials) => {
   return fetch(`${process.env.REACT_APP_API_URL}/users/register`, {
     method: "POST",
     headers: {
@@ -88,4 +90,6 @@ async function registerUser(credentials) {
     },
     body: JSON.stringify(credentials),
   }).then((data) => data.json());
-}
+};
+
+export default Registration;
