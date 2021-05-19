@@ -26,7 +26,6 @@ const Registration = () => {
     });
   };
 
-
   const submitHandler = async (event) => {
     event.preventDefault();
     setErrorMessage("");
@@ -41,6 +40,11 @@ const Registration = () => {
     } else if (!registered.statusCode) {
       setSuccessMessage("Registration Success! Please login!");
     }
+    setUserInput({
+      username: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -49,15 +53,30 @@ const Registration = () => {
       <form className="form" onSubmit={submitHandler}>
         <label>
           <p>Username</p>
-          <input type="text" required onChange={usernameChangeHandler} />
+          <input
+            type="text"
+            value={userInput.username}
+            required
+            onChange={usernameChangeHandler}
+          />
         </label>
         <label>
           <p>Email</p>
-          <input type="email" required onChange={emailChangeHandler} />
+          <input
+            type="email"
+            value={userInput.email}
+            required
+            onChange={emailChangeHandler}
+          />
         </label>
         <label>
           <p>Password</p>
-          <input type="password" required onChange={passwordChangeHandler} />
+          <input
+            type="password"
+            value={userInput.password}
+            required
+            onChange={passwordChangeHandler}
+          />
         </label>
         <div className="submit-button">
           <button type="submit">Submit</button>

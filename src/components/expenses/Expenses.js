@@ -1,15 +1,24 @@
 import { useState, useEffect, useMemo } from "react";
 import { useTable } from "react-table";
 import "./Expenses.css";
+import ExpenseCU from "./ExpenseCU";
 const Expenses = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const [expenses, setExpenses] = useState([]);
+  const [expense, setExpense] = useState({
+    expenseId: "",
+    expense: "",
+    amount: "",
+    date: "",
+  });
+  const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [reload, setReload] = useState(true);
+  const [reload, setReload] = useState(false);
+  const [isEdit, setEdit] = useState(false);
 
   useEffect(() => {
     let mounted = true;
-    setReload(true);
+    setReload(false);
     getAllExpenses(token).then((expenses) => {
       if (mounted) {
         setExpenses(expenses);
@@ -20,13 +29,23 @@ const Expenses = () => {
   }, [reload]);
 
   const editHandler = (item) => {
-    console.log(item);
+    setErrorMessage("");
+    setSuccessMessage(" ");
+    setExpense(item);
+    setEdit(false);
+    setEdit(true);
   };
-  const deleteHandler = (item) => {
+  const deleteHandler = async (item) => {
+    setErrorMessage("");
+    setSuccessMessage("");
     if (window.confirm("Delete this expense?")) {
-      deleteExpense(token, item.id);
-      setSuccessMessage("Expense deleted!");
-      setReload(false);
+      const deleted = await deleteExpense(token, item.id);
+      if (deleted.statusCode === 400) {
+        setErrorMessage("Error deleting message");
+      } else if (!deleted.statusCode) {
+        setSuccessMessage("Expense deleted!");
+        setReload(true);
+      }
     }
   };
 
@@ -37,17 +56,21 @@ const Expenses = () => {
       {
         Header: "Date",
         accessor: "date",
+        width: "100",
       },
       {
         Header: "Expense",
         accessor: "expense",
+        width: "200",
       },
       {
         Header: "Amount",
         accessor: "amount",
+        width: "100",
       },
       {
-        Header: "head",
+        Header: " ",
+        width: "100",
         Cell: ({ row }) => (
           <div>
             <button onClick={() => editHandler(row.original)}>Edit</button>
@@ -64,36 +87,52 @@ const Expenses = () => {
 
   return (
     <div className="expenses">
-      <h4 className="success-message">{successMessage}</h4>
-      <table className="expenses-table" {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th className="table-header" {...column.getHeaderProps()}>
-                  {column.render("Header")}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td className="table-data" {...cell.getCellProps()}>
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+      <div className="expenses-left">
+        <div className="expenses-messages">
+          <h4 className="error">{errorMessage}</h4>
+          <h4 className="success">{successMessage}</h4>
+        </div>
+        <table className="expenses-table" {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th className="table-header" {...column.getHeaderProps()}>
+                    {column.render("Header")}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()}>
+                  {row.cells.map((cell) => {
+                    return (
+                      <td className="table-data" {...cell.getCellProps()}>
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div className="expense-create-update">
+        {isEdit}
+        <ExpenseCU
+          setErrorMessage={setErrorMessage}
+          setSuccessMessage={setSuccessMessage}
+          expense={expense}
+          setEdit={setEdit}
+          isEdit={isEdit}
+          setReload={setReload}
+        />
+      </div>
     </div>
   );
 };

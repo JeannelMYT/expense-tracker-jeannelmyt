@@ -1,10 +1,12 @@
 import Expenses from "../expenses/Expenses";
 
-export default function Dashboard() {
+const Dashboard = () => {
   return (
-    <div>
+    <div className="dashboard">
       <h2>Dashboard</h2>
       <Expenses />
     </div>
   );
-}
+};
+
+export default Dashboard;
