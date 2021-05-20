@@ -51,26 +51,22 @@ const Expenses = () => {
 
   const data = useMemo(() => expenses, [expenses]);
 
-  const columns = useMemo(
+  let columns = useMemo(
     () => [
       {
         Header: "Date",
         accessor: "date",
-        width: "100",
       },
       {
         Header: "Expense",
         accessor: "expense",
-        width: "200",
       },
       {
         Header: "Amount",
         accessor: "amount",
-        width: "100",
       },
       {
         Header: " ",
-        width: "100",
         Cell: ({ row }) => (
           <div>
             <button onClick={() => editHandler(row.original)}>Edit</button>

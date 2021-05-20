@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+utilises react-router-dom (https://reactrouter.com/)
+dotenv (https://github.com/motdotla/dotenv)
+react-table(https://www.npmjs.com/package/react-table)
+
+Localstorage is used in this case as usually people will enter expenses from the same device 
