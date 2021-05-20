@@ -20,12 +20,12 @@ cp .env-example .env
 
 And edit the details: 
 ```
-REACT_APP_API_URL=***CHANGE TO BACKEND HOST***
+REACT_APP_API_URL=***CHANGE TO BACKEND HOST*** (e.g: http://localhost:4000)
 ```
 
 ### If you use npm
 Build the app
-`npm run install`
+`npm install`
 
 Start the app
 `npm run start`
