@@ -47,7 +47,9 @@ const PersonalDetails = (props) => {
       if (userInput.newPassword !== event.target.value) {
         setSuccessMessage("");
         setErrorMessage("Passwords don't match");
+        event.target.setCustomValidity("Needs to match New Password"); 
       } else if (userInput.newPassword === event.target.value) {
+        event.target.setCustomValidity("");
         setErrorMessage("");
       }
     }
@@ -64,7 +66,11 @@ const PersonalDetails = (props) => {
         email: userInput.email,
         password: userInput.password,
       });
-    } else {
+    } //else if (userInput.newPassword !== userInput.confirmPassword){
+    //   setErrorMessage("New Password and Confirm Password do not match")
+    // } 
+    
+    else {
       updated = await updateUserDetails(token, {
         username: userInput.username,
         email: userInput.email,
@@ -126,6 +132,7 @@ const PersonalDetails = (props) => {
           <input
             type="password"
             value={userInput.newPassword}
+            minLength="8"
             onChange={newPasswordChangeHandler}
           />
         </label>

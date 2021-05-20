@@ -75,6 +75,7 @@ const Registration = () => {
           <input
             type="password"
             value={userInput.password}
+            minLength="8"
             required
             onChange={passwordChangeHandler}
           />
