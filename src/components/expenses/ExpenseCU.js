@@ -1,10 +1,11 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import FormWrapperCard from "../cards/FormCard";
 
 const ExpenseCU = (props) => {
   const token = JSON.parse(localStorage.getItem("token"));
 
   useEffect(() => {
+    //eslint-disable-next-line
     let mounted = true;
     if (props.isEdit) {
       setUserInput({

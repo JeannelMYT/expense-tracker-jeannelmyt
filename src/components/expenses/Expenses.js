@@ -75,6 +75,7 @@ const Expenses = () => {
         ),
       },
     ],
+    //eslint-disable-next-line
     []
   );
 

@@ -1,35 +1,49 @@
 # Expense Tracker App
 
-A live version of this app is being run as a [Digital Ocean App](https://expense-tracker-jeannelmyt-g2sqi.ondigitalocean.app/) working with a [backend that is running on Heroku](https://expense-tracker-backend-jean.herokuapp.com/), and a MYSQL database running on a Digital Ocean server. Other than the database, both apps are running on free-tier servers so please excuse the slowness for which the app loads data.  
+A live version of this app is being run as a [Digital Ocean App](https://expense-tracker-jeannelmyt-g2sqi.ondigitalocean.app/) working with a [backend that is running on Heroku](https://expense-tracker-backend-jean.herokuapp.com/), and a MySQL database running on a Digital Ocean server. Other than the database, both apps are running on free-tier servers so please excuse the slowness for which the app loads data.  
 
 ## How to run locally 
 
 This was made to run with [a backend](https://github.com/JeannelMYT/expense-tracker-backend-jeannelmyt) so please download and run that first.
 
 ### Clone the app
-`git clone https://github.com/JeannelMYT/expense-tracker-jeannelmyt.git`
+```
+git clone https://github.com/JeannelMYT/expense-tracker-jeannelmyt.git
+
+cd expense-tracker-jeannelmyt/
+```
+
+### Edit environment variables 
+```
+cp .env-example .env
+```
+
+And edit the details: 
+```
+REACT_APP_API_URL=***CHANGE TO BACKEND HOST***
+```
 
 ### If you use npm
 Build the app
-`npm run build`
+`npm run install`
 
 Start the app
 `npm run start`
 
 ### If you use yarn
-Build the app
-`yarn build`
+Install and build the app
+`yarn install`
 
 Start the app
 `yarn start`
 
 
-After starting, navigate to `localhost:3000` on the browser and you should be directed to the Register/Login page.
+**After starting, navigate to `localhost:3000` on the browser and you should be directed to the Register/Login page.**
 
 
 ## Additional Notes
 
-1. Localstorage is used in this case as usually people will enter expenses from the same device.
+1. Local storage is used in this case as usually people will enter expenses from the same device.
 
 2. Ideally I would have preferred to have fixed widths for the react-table, but as I am unfamiliar with the library, I was unable to get this to work properly. 
 

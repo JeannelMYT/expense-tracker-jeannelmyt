@@ -40,7 +40,12 @@ const Login = (props) => {
       <form className="form login" onSubmit={submitHandler}>
         <label>
           <p>Username</p>
-          <input type="text" required onChange={usernameChangeHandler} />
+          <input
+            type="text"
+            maxlength="12"
+            required
+            onChange={usernameChangeHandler}
+          />
         </label>
         <label>
           <p>Password</p>

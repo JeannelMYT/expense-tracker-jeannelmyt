@@ -98,6 +98,7 @@ const PersonalDetails = (props) => {
           <input
             type="text"
             value={userInput.username}
+            maxlength="12"
             required
             onChange={usernameChangeHandler}
           />
